@@ -1,0 +1,13 @@
+name: TntMinigame
+main: io.github.pure1.tntminigame.tntminigame
+commands:
+  tntminigame:
+    description: Shows Tnt Minigame help.
+    aliases: [tnt]
+permissions:
+  tntminigame.*:
+    description: Gives access to all Tnt Minigame Commands
+version: 0.0.1
+
+
+
