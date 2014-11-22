@@ -40,7 +40,7 @@ public class TntMinigame extends JavaPlugin {
 
 	/*
 	 * update [0.0.2]:
-	 * + all admin command nodes + permissions.
+	 * + all admin command stubs + permissions.
 	 * 
 	 * update [0.0.1]:
 	 * + Base plugin files.
