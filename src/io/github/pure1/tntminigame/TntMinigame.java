@@ -39,11 +39,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class TntMinigame extends JavaPlugin {
 
 	/*
-	 * This update [0.0.1]:
+	 * update [0.0.2]:
+	 * + all admin command nodes + permissions.
+	 * 
+	 * update [0.0.1]:
 	 * + Base plugin files.
+	 * 
 	 */
 
-	/* TODO [0.0.2]
+	/* TODO
 	 * - Create required classes. [ ]
 	 * - Get Basic functionality. [ ]
 	 */

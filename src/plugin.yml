@@ -4,10 +4,97 @@ commands:
   tntminigame:
     description: Shows Tnt Minigame help.
     aliases: [tnt]
+  admintntminigame:
+    description: Shows Admin Tnt Minigame help.
+    aliases: [atnt]
 permissions:
+	 * tntminigame.admin
+	 * tntminigame.arena
+	 * tntminigame.arena.list
+	 * tntminigame.arena.make
+	 * tntminigame.arena.set
+	 * tntminigame.arena.del
+	 * tntminigame.lobby
+	 * tntminigame.lobby.make
+	 * tntminigame.lobby.set
+	 * tntminigame.lobby.del
+
   tntminigame.*:
-    description: Gives access to all Tnt Minigame Commands
-version: 0.0.1
+    description: Gives access to all Tnt Minigame's Commands
+    children:
+      tntminigame.admin.*: true
+    default:false
+    
+    
+  tntminigame.admin.*
+    description: Gives access to all Tnt Minigame's Admin commands
+    children:
+      tntminigame.admin: true
+      tntminigame.admin.arena.*: true
+      tntminigame.admin.lobby.*: true
+    default: false
+    
+  tntminigame.admin
+    description: Gives access to the "atnt" command
+  	default: false
+  	
+  tntminigame.admin.arena.*
+    description: Gives access to all commands under "atnt arena"
+    children:
+      tntminigame.admin.arena: true
+      tntminigame.admin.arena.list: true
+      tntminigame.admin.arena.make: true
+      tntminigame.admin.arena.set: true
+      tntminigame.admin.arena.del: true
+    default: false
+    
+  tntminigame.admin.arena
+    description: Gives access to the "atnt arena" command
+    default: false
+    
+  tntminigame.admin.arena.list
+    description: Gives access to the "atnt arena list" command
+    default: false
+    
+  tntminigame.admin.arena.make
+    description: Gives access to the "atnt arena make" command
+    default: false
+    
+  tntminigame.admin.arena.set
+    description: Gives access to the "atnt arena set" command
+    default: false
+    
+  tntminigame.admin.arena.del
+    description: Gives access to the "atnt arena del" command
+    default: false
+    
+    
+  tntminigame.admin.lobby.*
+    description: Gives access to all commands under "atnt lobby"
+    children:
+      tntminigame.admin.lobby: true
+      tntminigame.admin.lobby.make: true
+      tntminigame.admin.lobby.set: true
+      tntminigame.admin.lobby.del:  true
+    default: false
+    
+  tntminigame.admin.lobby
+    description: Gives access to the "atnt lobby" command
+    default: false
+    
+  tntminigame.admin.lobby.make
+    description: Gives access to the "atnt lobby make" command
+    default: false
+
+  tntminigame.admin.lobby.set
+    description: Gives access to the "atnt lobby set" command
+    default: false
+
+  tntminigame.admin.lobby.del
+    description: Gives access to the "atnt del" command
+    default: false
+
+version: 0.0.2
 
 
 

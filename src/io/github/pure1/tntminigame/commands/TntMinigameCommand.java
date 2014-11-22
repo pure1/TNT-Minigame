@@ -22,6 +22,9 @@ import io.github.pure1.tntminigame.TntMinigame;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import com.google.common.base.CaseFormat;
 
 public class TntMinigameCommand implements CommandExecutor{
 
@@ -33,14 +36,17 @@ public class TntMinigameCommand implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("tntminigame")){
-			TntMinigame(sender, args);
-		}else{}
+		if (cmd.getName().equalsIgnoreCase("admintntminigame") && sender.hasPermission("tntminigame.admin")){
+			AdminCommand.command(sender, args);
+		}else{
+			command(sender, args);
+		}
 
 		return false;
 	}
 
-	private void TntMinigame(CommandSender sender, String[] args) {
+	private void command(CommandSender sender, String[] args) {
 		
 	}
+
 }
