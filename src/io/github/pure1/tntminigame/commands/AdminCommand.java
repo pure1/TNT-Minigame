@@ -1,6 +1,9 @@
 package io.github.pure1.tntminigame.commands;
 
+import io.github.pure1.tntminigame.arena.ArenaHandler;
+
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public abstract class AdminCommand{
 
@@ -100,6 +103,7 @@ public abstract class AdminCommand{
 	private static void adminHelp(CommandSender sender) {
 		if(!sender.hasPermission("tntminigame.admin"))return;
 		//TODO
+		sender.sendMessage("atnt help");
 	}
 	
 	private static void lobby(CommandSender sender, String[] args) {
@@ -189,6 +193,7 @@ public abstract class AdminCommand{
 	private static void arenaHelp(CommandSender sender) {
 		if(!sender.hasPermission("tntminigame.admin.arena"))return;
 		//TODO
+		sender.sendMessage("atnt arena help");
 	}
 	
 	private static void arenaList(CommandSender sender) {
@@ -198,16 +203,18 @@ public abstract class AdminCommand{
 	
 	private static void arenaMake(CommandSender sender, String[] args) {
 		if(!sender.hasPermission("tntminigame.admin.arena.make"))return;
-		if(args.length < 2){
+		if(args.length < 3){
 			arenaMakeHelp(sender);
 		}else{
-			//TODO
+			if(ArenaHandler.newArena((Player)sender, args[2]))sender.sendMessage("arena made");
+			System.out.println("command");
 		}
 	}
 	
 	private static void arenaMakeHelp(CommandSender sender) {
 		if(!sender.hasPermission("tntminigame.admin.arena.make"))return;
 		//TODO
+		sender.sendMessage("atnt arena make help");
 	}
 
 	private static void arenaSet(CommandSender sender, String[] args) {
@@ -222,6 +229,7 @@ public abstract class AdminCommand{
 	private static void arenaSetHelp(CommandSender sender) {
 		if(!sender.hasPermission("tntminigame.admin.arena.set"))return;
 		//TODO
+		sender.sendMessage("atnt arena set help");
 	}
 
 	private static void arenaDel(CommandSender sender, String[] args) {
@@ -236,6 +244,7 @@ public abstract class AdminCommand{
 	private static void arenaDelHelp(CommandSender sender) {
 		if(!sender.hasPermission("tntminigame.admin.arena.del"))return;
 		//TODO
+		sender.sendMessage("atnt arena del help");
 	}
 
 

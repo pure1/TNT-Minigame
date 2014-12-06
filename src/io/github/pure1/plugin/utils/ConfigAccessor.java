@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,9 +111,8 @@ public class ConfigAccessor {
 		return fileConfiguration.getBoolean(path);
 	}
 
-	public Object getString(String path) {
-		// TODO Auto-generated method stub
-		return fileConfiguration.get(path);
+	public String getString(String path) {
+		return fileConfiguration.getString(path);
 	}
 
 	public List<String> getStringList(String path) {
@@ -120,9 +120,21 @@ public class ConfigAccessor {
 		return fileConfiguration.getStringList(path);
 	}
 
+	public int getInt(String path){
+		return fileConfiguration.getInt(path);
+	}
 	public void setBoolean(String path, boolean b) {
 		fileConfiguration.set(path, b);
 		
 	}
 
+	public void setString(String path, String string) {
+		System.out.println(path + " " + string);
+		fileConfiguration.set(path, string);
+		
+	}
+	public void setStringList(String path, ArrayList<String> stringList) {
+		System.out.println(path + " " + stringList);
+		fileConfiguration.set(path, stringList);	
+	}
 }

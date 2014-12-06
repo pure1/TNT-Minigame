@@ -27,6 +27,7 @@ package io.github.pure1.tntminigame;
 
 import io.github.pure1.tntminigame.listeners.BlockListener;
 import io.github.pure1.tntminigame.listeners.PlayerListener;
+import io.github.pure1.tntminigame.arena.ArenaHandler;
 import io.github.pure1.tntminigame.commands.TntMinigameCommand;
 import io.github.pure1.plugin.utils.ConfigAccessor;
 import io.github.pure1.plugin.utils.Metrics;
@@ -36,9 +37,14 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.sk89q.worldedit.WorldEdit;
+
 public class TntMinigame extends JavaPlugin {
 
-	/*
+	/* update [0.0.3]:
+	 * + arenas, they are makeable but as of yet do nothing.
+	 * + more or less completed the arena handler.
+	 * 
 	 * update [0.0.2]:
 	 * + all admin command stubs + permissions.
 	 * 
@@ -48,8 +54,9 @@ public class TntMinigame extends JavaPlugin {
 	 */
 
 	/* TODO
-	 * - Create required classes. [ ]
+	 * - Create required classes. [X]
 	 * - Get Basic functionality. [ ]
+	 * - Complete Lobbies.        [ ]
 	 */
 
 	
@@ -62,51 +69,70 @@ public class TntMinigame extends JavaPlugin {
 	public final Logger logger = Logger.getLogger("Minecraft");
 		
 	public static ConfigAccessor config;
+	public static ConfigAccessor arena;
 	
-	
+	private static WorldEdit worldEdit;
 	private PlayerListener playerListener;
 	private BlockListener blockListener;
 	
+	private ArenaHandler arenaHandler;
+	
 	private TntMinigameCommand TntMinigameCommand;
 	
-	/** on enable */
+	
+	/**
+	 * on Enable.
+	 */
 	@Override
 	public void onEnable() {
-
+		config = new ConfigAccessor(this, "config.yml");
+		arena = new ConfigAccessor(this, "arena.yml");
+		initConfig();
 		init();
 		registerListeners();
 		registerCommands();
 		registerManagers();
 		Metrics();
 		
-		//initConfig();
 	}
 
-	/** Initialise variables */
+	/** 
+	 * Initialise Listeners, Handlers and Commands
+	 */
 	public void init(){
-		//config = new ConfigAccessor(this, "config.yml");
+		setWorldEdit(WorldEdit.getInstance());
 		playerListener = new PlayerListener(this);
 		blockListener = new BlockListener(this);
+		setArenaHandler(new ArenaHandler(this));
 		TntMinigameCommand = new TntMinigameCommand(this);
 	}
 	
-	/** Register Listeners */
+	/**
+	 * Register Listeners.
+	 */
 	public void registerListeners(){
 		getServer().getPluginManager().registerEvents(playerListener, this);
 		getServer().getPluginManager().registerEvents(blockListener, this);
 	}
 	
-	/** Register Commands */
+	/** 
+	 * Register Commands.
+	 */
 	public void registerCommands(){
-		getCommand("TntMinigame").setExecutor(TntMinigameCommand);
+		getCommand("tntminigame").setExecutor(TntMinigameCommand);
+		getCommand("admintntminigame").setExecutor(TntMinigameCommand);
 	}
 	
-	/** Register Managers */
+	/** 
+	 * Register Managers.
+	 */
 	public void registerManagers(){
 		
 	}
 	
-	/** Metrics */
+	/** 
+	 * Metrics. 
+	 */
 	public void Metrics(){
 		if (released) {
 			try {
@@ -117,14 +143,50 @@ public class TntMinigame extends JavaPlugin {
 		}
 	}
 	
-	/** Initalize Config */
+	/** 
+	 * Initalize Config. 
+	 */
 	public void initConfig(){
 		config.saveDefaultConfig();
 		config.getConfig();
 		config.saveConfig();
+		arena.saveDefaultConfig();
+		arena.getConfig();
+		arena.saveConfig();
 	}
 	
+	/**
+	 * On Disable.
+	 */
 	@Override
 	public void onDisable() {
+	}
+
+	/**
+	 * @return the arenaHandler
+	 */
+	public ArenaHandler getArenaHandler() {
+		return arenaHandler;
+	}
+
+	/**
+	 * @param arenaHandler the arenaHandler to set
+	 */
+	public void setArenaHandler(ArenaHandler arenaHandler) {
+		this.arenaHandler = arenaHandler;
+	}
+
+	/**
+	 * @return the worldEdit
+	 */
+	public WorldEdit getWorldEdit() {
+		return worldEdit;
+	}
+
+	/**
+	 * @param worldEdit the worldEdit to set
+	 */
+	public static void setWorldEdit(WorldEdit worldEdit) {
+		TntMinigame.worldEdit = worldEdit;
 	}
 }

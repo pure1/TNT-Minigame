@@ -36,7 +36,9 @@ public class TntMinigameCommand implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		System.out.println(cmd.getName());
 		if (cmd.getName().equalsIgnoreCase("admintntminigame") && sender.hasPermission("tntminigame.admin")){
+			System.out.println("pic pic");
 			AdminCommand.command(sender, args);
 		}else{
 			command(sender, args);
